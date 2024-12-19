@@ -1,5 +1,6 @@
 using caditec_back_end.Data.Models.Options.MediaService;
 using caditec_back_end.Data.Models.Results.MediaService;
+using caditec_back_end.Exceptions.Services.MediaService;
 using caditec_back_end.Services.Interfaces;
 
 namespace caditec_back_end.Services.Concretes
@@ -16,16 +17,19 @@ namespace caditec_back_end.Services.Concretes
                     Directory.CreateDirectory(options.DirectoryPath);
                 }
 
-                string fullPath = Path.Combine(options.DirectoryPath, options.FileName);
+                string fullPath = Path.Combine(options.DirectoryPath, options.FormFile.FileName);
+                if (File.Exists(fullPath))
+                {
+                    throw new FileAlreadyExistsException(options);
+                }
 
                 using (FileStream stream = new(fullPath, FileMode.Create))
                 {
-                    await options.File.CopyToAsync(stream, options.CancellationToken);
+                    await options.FormFile.CopyToAsync(stream, options.CancellationToken ?? new CancellationToken());
                 }
 
                 result = new CreateMediaResult
                 {
-                    Success = true,
                     FilePath = fullPath
                 };
             }
@@ -33,8 +37,7 @@ namespace caditec_back_end.Services.Concretes
             {
                 result = new CreateMediaResult
                 {
-                    Success = false,
-                    ErrorMessage = exception.Message
+                    ExceptionMessage = exception.Message
                 };
             }
             return result;

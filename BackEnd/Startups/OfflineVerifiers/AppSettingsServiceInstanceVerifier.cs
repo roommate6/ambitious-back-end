@@ -49,25 +49,25 @@ namespace BackEnd.Startups.OfflineVerifiers
         private static string VerifyDatabase(AppSettingsService appSettingsService)
         {
             StringBuilder exceptionMessagesBuffer = new("");
-            if (string.IsNullOrEmpty(appSettingsService.Secrets.Database.Host))
+            if (string.IsNullOrEmpty(appSettingsService.Secrets.DatabaseSettings.Host))
             {
-                exceptionMessagesBuffer.AppendLine("Secrets:Database:Host - (exception) string.IsNullOrEmpty");
+                exceptionMessagesBuffer.AppendLine("Secrets:DatabaseSettings:Host - (exception) string.IsNullOrEmpty");
             }
-            if (!Database.PortIsValid(appSettingsService.Secrets.Database.Port))
+            if (!DatabaseSettings.PortIsValid(appSettingsService.Secrets.DatabaseSettings.Port))
             {
-                exceptionMessagesBuffer.AppendLine("Secrets:Database:Port - (exception) !Database.PortIsValid");
+                exceptionMessagesBuffer.AppendLine("Secrets:DatabaseSettings:Port - (exception) !Database.PortIsValid");
             }
-            if (string.IsNullOrEmpty(appSettingsService.Secrets.Database.User))
+            if (string.IsNullOrEmpty(appSettingsService.Secrets.DatabaseSettings.User))
             {
-                exceptionMessagesBuffer.AppendLine("Secrets:Database:User - (exception) string.IsNullOrEmpty");
+                exceptionMessagesBuffer.AppendLine("Secrets:DatabaseSettings:User - (exception) string.IsNullOrEmpty");
             }
-            if (string.IsNullOrEmpty(appSettingsService.Secrets.Database.Password))
+            if (string.IsNullOrEmpty(appSettingsService.Secrets.DatabaseSettings.Password))
             {
-                exceptionMessagesBuffer.AppendLine("Secrets:Database:Password - (exception) string.IsNullOrEmpty");
+                exceptionMessagesBuffer.AppendLine("Secrets:DatabaseSettings:Password - (exception) string.IsNullOrEmpty");
             }
-            if (string.IsNullOrEmpty(appSettingsService.Secrets.Database.Name))
+            if (string.IsNullOrEmpty(appSettingsService.Secrets.DatabaseSettings.Name))
             {
-                exceptionMessagesBuffer.AppendLine("Secrets:Database:Name - (exception) string.IsNullOrEmpty");
+                exceptionMessagesBuffer.AppendLine("Secrets:DatabaseSettings:Name - (exception) string.IsNullOrEmpty");
             }
 
             return exceptionMessagesBuffer.ToString();

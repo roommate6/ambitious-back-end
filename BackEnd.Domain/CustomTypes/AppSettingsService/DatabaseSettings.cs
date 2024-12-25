@@ -1,6 +1,6 @@
 namespace BackEnd.Domain.CustomTypes.AppSettingsService
 {
-    public struct Database
+    public struct DatabaseSettings
     {
         public required string Host { get; set; }
         public required int Port { get; set; }

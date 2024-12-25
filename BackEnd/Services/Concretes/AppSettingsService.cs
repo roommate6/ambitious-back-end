@@ -21,10 +21,10 @@ namespace BackEnd.Services.Concretes
                 },
                 Secrets = new()
                 {
-                    Database = new()
+                    DatabaseSettings = new()
                     {
                         Host = string.Empty,
-                        Port = Database.GetRandomInvalidPort(),
+                        Port = DatabaseSettings.GetRandomInvalidPort(),
                         User = string.Empty,
                         Password = string.Empty,
                         Name = string.Empty
